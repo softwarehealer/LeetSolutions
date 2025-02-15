@@ -1,3 +1,4 @@
+from collections import defaultdict
 class Solution(object):
     def twoSum(self, nums, target):
         """
@@ -5,9 +6,10 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
+        num_dict = defaultdict(int,dict.fromkeys(set(nums),1))
         sol_list=[]
         for i,x in enumerate(nums):
-            if target-x in nums:
-                if (target-x==x and nums.count(x)>1) or target-x!=x:
+            if num_dict[target-x]:
+                if target-x!=x or ( target-x==x and nums.count(x) > 1):
                     sol_list.append(i)
         return sol_list
